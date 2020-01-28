@@ -47,9 +47,7 @@ namespace ArrayCreation
             for (int i = array.Length - 1; i >= 1; i--)
             {
                 int j = random.Next(i + 1);
-                int temp = array[j];
-                array[j] = array[i];
-                array[i] = temp;
+                Swap(ref array[i], ref array[j]);
             }
 
             return array;
@@ -67,13 +65,10 @@ namespace ArrayCreation
                 throw new ArgumentNullException(nameof(array), "cannot be null");
             }
 
-            int temp;
             for (int i = 0; i < (array.Length / 2) - 1; i++)
-                {
-                    temp = array[i];
-                    array[i] = array[array.Length - i - 1];
-                    array[array.Length - i - 1] = temp;
-                }
+            {
+                Swap(ref array[i], ref array[array.Length - i - 1]);
+            }
 
             return array;
         }
@@ -90,15 +85,19 @@ namespace ArrayCreation
                 throw new ArgumentNullException(nameof(array), "cannot be null");
             }
 
-            int temp;
             for (int i = 0; i < array.Length - 1; i += 2)
             {
-                temp = array[i];
-                array[i] = array[i + 1];
-                array[i + 1] = temp;
+                Swap(ref array[i], ref array[i + 1]);
             }
 
             return array;
+        }
+
+        private static void Swap(ref int a, ref int b)
+        {
+            int temp = a;
+            a = b;
+            b = temp;
         }
     }
 }
